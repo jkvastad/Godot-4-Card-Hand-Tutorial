@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt3irvctmydo6"]
+
+[ext_resource type="Script" path="res://Scripts/Card.cs" id="1_gq2v2"]
+[ext_resource type="Texture2D" uid="uid://l1xsphvof584" path="res://icon.svg" id="2_1i7tl"]
+
+[node name="Card" type="Control" node_paths=PackedStringArray("text")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_gq2v2")
+text = NodePath("TextPanel/Text")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("2_1i7tl")
+
+[node name="TextPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 128.0
+offset_right = 125.0
+offset_bottom = 160.0
+
+[node name="Text" type="Label" parent="TextPanel"]
+layout_mode = 2
+offset_right = 48.0
+offset_bottom = 26.0
+text = "Namn"

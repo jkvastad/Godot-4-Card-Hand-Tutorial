@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqa5kg35fbdxw"]
+
+[ext_resource type="PackedScene" uid="uid://dna1cmql8iqdt" path="res://Scenes/card_hand.tscn" id="1_5ooob"]
+
+[node name="Main" type="Node"]
+
+[node name="CardHand" parent="." instance=ExtResource("1_5ooob")]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dna1cmql8iqdt"]
+
+[ext_resource type="Script" path="res://Scripts/CardHand.cs" id="1_54ttf"]
+[ext_resource type="PackedScene" uid="uid://dt3irvctmydo6" path="res://Scenes/card.tscn" id="2_21pom"]
+
+[node name="CardHand" type="Container"]
+script = ExtResource("1_54ttf")
+
+[node name="Card" parent="." instance=ExtResource("2_21pom")]
+layout_mode = 2
+
+[node name="Card2" parent="." instance=ExtResource("2_21pom")]
+layout_mode = 2
+
+[node name="Card3" parent="." instance=ExtResource("2_21pom")]
+layout_mode = 2
