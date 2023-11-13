@@ -5,6 +5,7 @@ public partial class Card : Control
 {
 	[Export]
 	public Label text;
+	public Tween tween;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

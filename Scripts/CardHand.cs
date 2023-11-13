@@ -8,42 +8,38 @@ public partial class CardHand : Container
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
-    {
+    {        
         SortChildren += SortCards;
         Godot.Collections.Array<Node> cards = GetChildren();
         foreach (Card card in cards)
         {
-            card.GuiInput += (InputEvent theEvent) => cardIsClicked(theEvent, card);
+            card.GuiInput += (InputEvent theEvent) => CardIsClicked(theEvent, card);
         }
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-    }
+    
 
     public override void _PhysicsProcess(double delta)
     {
         if (selectedCard != null)
         {
             selectedCard.Position = GetGlobalMousePosition() - selectionOffset;
-        }
-        base._PhysicsProcess(delta);
+        }        
     }
 
     public void SortCards()
     {
-        Godot.Collections.Array<Node> children = GetChildren();
+        Godot.Collections.Array<Node> cards = GetChildren();
         var i = 0;
-        foreach (Card child in children)
+        foreach (Card card in cards)
         {
             Vector2 position = new Vector2(128f * i, 0f);
-            i++;
-            child.SetPosition(position);
+            i++;                        
+            card.tween = CreateTween();            
+            card.tween.TweenProperty(card, "position", position, 0.5f);
         }
     }
 
-    public void cardIsClicked(InputEvent @event, Card card)
+    public void CardIsClicked(InputEvent @event, Card card)
     {
         if (@event is InputEventMouseButton mouseEvent)
         {
@@ -51,7 +47,7 @@ public partial class CardHand : Container
             {
                 selectedCard = card;
                 selectionOffset = card.GetLocalMousePosition();
-                GD.Print("Card " + card.text.Text + " clicked with " + @event.AsText());
+                GD.Print("Card " + card.text.Text + " clicked with " + @event.AsText());                                
             }
             if (!mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
             {
