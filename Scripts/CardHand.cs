@@ -9,6 +9,7 @@ public partial class CardHand : Container
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        SortChildren += SortCards;
         Godot.Collections.Array<Node> cards = GetChildren();
         foreach (Card card in cards)
         {
@@ -30,18 +31,15 @@ public partial class CardHand : Container
         base._PhysicsProcess(delta);
     }
 
-    public override void _Notification(int notification)
+    public void SortCards()
     {
-        if (notification == NotificationSortChildren)
+        Godot.Collections.Array<Node> children = GetChildren();
+        var i = 0;
+        foreach (Card child in children)
         {
-            Godot.Collections.Array<Node> children = GetChildren();
-            var i = 0;
-            foreach (Card child in children)
-            {
-                Vector2 position = new Vector2(128f * i, 0f);
-                i++;
-                child.SetPosition(position);
-            }
+            Vector2 position = new Vector2(128f * i, 0f);
+            i++;
+            child.SetPosition(position);
         }
     }
 
@@ -59,6 +57,7 @@ public partial class CardHand : Container
             {
                 selectedCard = null;
                 GD.Print("Card " + card.text.Text + " released with " + @event.AsText());
+                EmitSignal(SignalName.SortChildren);
             }
         }
     }
