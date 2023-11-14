@@ -16,14 +16,15 @@ offset_right = 128.0
 offset_bottom = 128.0
 texture = ExtResource("2_1i7tl")
 
-[node name="TextPanel" type="Panel" parent="."]
+[node name="TextPanel" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_top = 128.0
-offset_right = 125.0
-offset_bottom = 160.0
+offset_right = 128.0
+offset_bottom = 154.0
+mouse_filter = 1
 
 [node name="Text" type="Label" parent="TextPanel"]
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-offset_right = 48.0
-offset_bottom = 26.0
 text = "Namn"
+autowrap_mode = 3

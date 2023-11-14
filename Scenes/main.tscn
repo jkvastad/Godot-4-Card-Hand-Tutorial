@@ -5,3 +5,9 @@
 [node name="Main" type="Node"]
 
 [node name="CardHand" parent="." instance=ExtResource("1_5ooob")]
+
+[node name="CardHand2" parent="." instance=ExtResource("1_5ooob")]
+offset_left = 444.0
+offset_top = 282.0
+offset_right = 444.0
+offset_bottom = 282.0

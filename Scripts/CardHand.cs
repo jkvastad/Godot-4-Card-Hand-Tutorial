@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class CardHand : Container
 {
@@ -7,13 +8,12 @@ public partial class CardHand : Container
     public float sortSpeed = 1.0f;
     Card selectedCard;
     Vector2 selectionOffset;
-
-    // Called when the node enters the scene tree for the first time.
+    
     public override void _Ready()
     {
         SortChildren += SortCards;
         Godot.Collections.Array<Node> cards = GetChildren();
-        foreach (Card card in cards)
+        foreach (Card card in cards.Cast<Card>())
         {
             card.GuiInput += (InputEvent theEvent) => CardIsClicked(theEvent, card);
         }
@@ -23,7 +23,7 @@ public partial class CardHand : Container
     {
         if (selectedCard != null)
         {
-            selectedCard.Position = GetGlobalMousePosition() - selectionOffset;
+            selectedCard.GlobalPosition = GetGlobalMousePosition() - selectionOffset;            
         }
     }
 
@@ -49,8 +49,8 @@ public partial class CardHand : Container
         {
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
             {
-                selectedCard = card;
-                selectionOffset = card.GetLocalMousePosition();
+                selectedCard = card;                                
+                selectionOffset = mouseEvent.Position;                
                 GD.Print("Card " + card.text.Text + " clicked with " + @event.AsText()); //TODO remove
                 card.tween?.Kill();
 
