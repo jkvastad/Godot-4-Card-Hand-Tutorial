@@ -7,10 +7,7 @@
 script = ExtResource("1_54ttf")
 
 [node name="Card" parent="." instance=ExtResource("2_21pom")]
-layout_mode = 2
 
 [node name="Card2" parent="." instance=ExtResource("2_21pom")]
-layout_mode = 2
 
 [node name="Card3" parent="." instance=ExtResource("2_21pom")]
-layout_mode = 2

@@ -14,7 +14,8 @@ public partial class CardHand : Container
         Godot.Collections.Array<Node> cards = GetChildren();
         foreach (Card card in cards.Cast<Card>())
         {
-            card.GuiInput += (InputEvent theEvent) => CardIsClicked(theEvent, card);
+            card.InputEvent += (Node viewport, InputEvent @event, long shapeIdx) => CardIsClicked(viewport, @event, shapeIdx, card);
+            //card.GuiInput += (InputEvent theEvent) => CardIsClicked(theEvent, card);
         }
     }
 
@@ -42,22 +43,22 @@ public partial class CardHand : Container
         }
     }
 
-    public void CardIsClicked(InputEvent @event, Card card)
+    public void CardIsClicked(Node viewport, InputEvent @event, long shapeIdx, Card card)
     {
         if (@event is InputEventMouseButton mouseEvent)
         {
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
             {
                 selectedCard = card;                                
-                selectionOffset = mouseEvent.Position;                
-                GD.Print("Card " + card.text.Text + " clicked with " + @event.AsText()); //TODO remove
+                selectionOffset = mouseEvent.GlobalPosition - card.GlobalPosition;
+                GD.Print("Card " + card.textLabel.Text + " clicked with " + @event.AsText()); //TODO remove
                 card.tween?.Kill();
 
             }
             if (!mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
             {
                 selectedCard = null;
-                GD.Print("Card " + card.text.Text + " released with " + @event.AsText()); //TODO remove
+                GD.Print("Card " + card.textLabel.Text + " released with " + @event.AsText()); //TODO remove
                 EmitSignal(SignalName.SortChildren);
             }
         }

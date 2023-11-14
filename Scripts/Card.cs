@@ -1,15 +1,15 @@
 using Godot;
 using System;
 
-public partial class Card : Control
+public partial class Card : Area2D
 {
 	[Export]
-	public Label text;
+	public RichTextLabel textLabel;
 	public Tween tween;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		text.Text = GetPath();
+		textLabel.Text = GetPath();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,10 +17,11 @@ public partial class Card : Control
 	{
 	}
 
-    public override void _GuiInput(InputEvent @event)
-    {
-        if (@event is InputEventMouseButton mouseEvent)
-            GD.Print("Card " + text.Text + " received gui input " + mouseEvent.AsText());
-        base._GuiInput(@event);
-    }
+
+    //public override void _GuiInput(InputEvent @event)
+    //{
+    //    if (@event is InputEventMouseButton mouseEvent)
+    //        GD.Print("Card " + text.Text + " received gui input " + mouseEvent.AsText());
+    //    base._GuiInput(@event);
+    //}
 }
