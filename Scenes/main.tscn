@@ -5,6 +5,10 @@
 [node name="Main" type="Node"]
 
 [node name="CardHand" parent="." instance=ExtResource("1_5ooob")]
+offset_left = 202.0
+offset_top = 277.0
+offset_right = 202.0
+offset_bottom = 277.0
 
 [node name="CardHand2" parent="." instance=ExtResource("1_5ooob")]
 offset_left = 444.0

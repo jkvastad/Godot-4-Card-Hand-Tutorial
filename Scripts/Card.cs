@@ -16,4 +16,11 @@ public partial class Card : Control
 	public override void _Process(double delta)
 	{
 	}
+
+    public override void _GuiInput(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouseEvent)
+            GD.Print("Card " + text.Text + " received gui input " + mouseEvent.AsText());
+        base._GuiInput(@event);
+    }
 }
