@@ -6,9 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0l0"]
 size = Vector2(128, 128)
 
-[node name="Card" type="Area2D" node_paths=PackedStringArray("textLabel")]
+[node name="Card" type="Area2D" node_paths=PackedStringArray("textLabel", "cardArt")]
 script = ExtResource("1_gq2v2")
 textLabel = NodePath("TextPanel/Text")
+cardArt = NodePath("CardArt")
 
 [node name="CardArt" type="Sprite2D" parent="."]
 texture = ExtResource("2_1i7tl")

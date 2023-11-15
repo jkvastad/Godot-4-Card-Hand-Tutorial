@@ -6,6 +6,9 @@ public partial class Card : Area2D
 	[Export]
 	public RichTextLabel textLabel;
 	public Tween tween;
+    [Export]
+    public Sprite2D cardArt;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -15,13 +18,17 @@ public partial class Card : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-	}
+    }
 
+    public override void _MouseEnter()
+    {
+        GD.Print("Mouse entered " + textLabel.Text);
+        cardArt.Modulate = Colors.LightPink;
+    }
 
-    //public override void _GuiInput(InputEvent @event)
-    //{
-    //    if (@event is InputEventMouseButton mouseEvent)
-    //        GD.Print("Card " + text.Text + " received gui input " + mouseEvent.AsText());
-    //    base._GuiInput(@event);
-    //}
+    public override void _MouseExit()
+    {
+        GD.Print("Mouse exited " + textLabel.Text);
+        cardArt.Modulate = Colors.White;
+    }
 }
