@@ -5,13 +5,7 @@
 [node name="Main" type="Node"]
 
 [node name="CardHand" parent="." instance=ExtResource("1_5ooob")]
-offset_left = 98.0
-offset_top = 92.0
-offset_right = 98.0
-offset_bottom = 92.0
+position = Vector2(315, 67)
 
 [node name="CardHand2" parent="." instance=ExtResource("1_5ooob")]
-offset_left = 321.0
-offset_top = 407.0
-offset_right = 321.0
-offset_bottom = 407.0
+position = Vector2(73, 337)

@@ -1,7 +1,7 @@
 using Godot;
 using System.Linq;
 
-public partial class CardHand : Container
+public partial class CardHand : Node2D
 {
     [Export]
     public float sortSpeed = 1.0f;
@@ -10,13 +10,12 @@ public partial class CardHand : Container
     
     public override void _Ready()
     {
-        SortChildren += SortCards;
         Godot.Collections.Array<Node> cards = GetChildren();
         foreach (Card card in cards.Cast<Card>())
         {
             card.InputEvent += (Node viewport, InputEvent @event, long shapeIdx) => CardIsClicked(viewport, @event, shapeIdx, card);
-            //card.GuiInput += (InputEvent theEvent) => CardIsClicked(theEvent, card);
         }
+        SortCards();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -57,9 +56,10 @@ public partial class CardHand : Container
             }
             if (!mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
             {
+                //kolla om det finns en selected card, om ja kolla om ett annat kort ngonstans blivit traffat av left mouse release?
                 selectedCard = null;
-                GD.Print("Card " + card.textLabel.Text + " released with " + @event.AsText()); //TODO remove
-                EmitSignal(SignalName.SortChildren);
+                GD.Print("Card " + card.textLabel.Text + " released with " + @event.AsText()); //TODO remove                                                                                                              
+                SortCards();
             }
         }
     }
