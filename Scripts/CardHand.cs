@@ -7,7 +7,7 @@ public partial class CardHand : Node2D
     public float sortSpeed = 1.0f;
     Card selectedCard;
     Vector2 selectionOffset;
-    
+
     public override void _Ready()
     {
         Godot.Collections.Array<Node> cards = GetChildren();
@@ -22,7 +22,10 @@ public partial class CardHand : Node2D
     {
         if (selectedCard != null)
         {
-            selectedCard.GlobalPosition = GetGlobalMousePosition() - selectionOffset;            
+            selectedCard.GlobalPosition = GetGlobalMousePosition() - selectionOffset;
+            //hur kolla bara en gang vid release? Inputmapping med just released?
+            //Input.IsActionJustReleased(MouseButton.Left);
+            GD.Print(GetWorld2D().DirectSpaceState.IntersectPoint(new() { Position = GetGlobalMousePosition(), CollideWithAreas = true }).Count);
         }
     }
 
@@ -48,7 +51,7 @@ public partial class CardHand : Node2D
         {
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
             {
-                selectedCard = card;                                
+                selectedCard = card;
                 selectionOffset = mouseEvent.GlobalPosition - card.GlobalPosition;
                 GD.Print("Card " + card.textLabel.Text + " clicked with " + @event.AsText()); //TODO remove
                 card.tween?.Kill();

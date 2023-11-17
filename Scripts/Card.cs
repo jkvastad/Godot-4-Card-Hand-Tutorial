@@ -21,14 +21,12 @@ public partial class Card : Area2D
     }
 
     public override void _MouseEnter()
-    {
-        GD.Print("Mouse entered " + textLabel.Text);
+    {        
         cardArt.Modulate = Colors.LightPink;
     }
 
     public override void _MouseExit()
-    {
-        GD.Print("Mouse exited " + textLabel.Text);
+    {        
         cardArt.Modulate = Colors.White;
     }
 }
