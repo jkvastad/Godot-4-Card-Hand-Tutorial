@@ -9,9 +9,8 @@ The features are mainly:
 
 ## Object Picking 
 A.K.A. clicking on stuff with the mouse.
-* The last consumer of an input in the pipeline is an inbuilt raycast.
-* see [godot docs on input event](https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html#how-does-it-work)
-* see [_input_event](https://docs.godotengine.org/en/stable/classes/class_collisionobject2d.html#class-collisionobject2d-method-input-event) on e.g. CollisionObject2D
+* [The last consumer of an input in the input pipeline](https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html#how-does-it-work) is an inbuilt raycast.
+  * see [_input_event](https://docs.godotengine.org/en/stable/classes/class_collisionobject2d.html#class-collisionobject2d-method-input-event) on e.g. CollisionObject2D
 
 ## Node Basics - 3D, 2D or Control?
 In this project I used Node2D based nodes.
