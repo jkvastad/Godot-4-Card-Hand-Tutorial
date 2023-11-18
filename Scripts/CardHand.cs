@@ -55,25 +55,12 @@ public partial class CardHand : Node2D
         }
     }
 
-    public void AddCard(Card card, int index)
+    public void ReparentCard(Card card, int index, CardHand cardHand)
     {
-        GD.Print($"Card position before adding {card.Position}, global position {card.GlobalPosition}, offset is {selectionOffset}");
-        Vector2 oldGlobal = card.GlobalPosition;        
-        AddChild(card);
-        Vector2 newGlobal = card.GlobalPosition;
-        //card.Position -= newGlobal - oldGlobal;
-        GD.Print($"Card position after adding {card.Position}, global position {card.GlobalPosition}, offset is {selectionOffset}");
-        //Vector2 oldPosition = card.Position;
-        //card.GlobalPosition = card.Position;
-        //GD.Print($"Card position is {card.Position} after setting global position {card.GlobalPosition} to {oldPosition}");
-        MoveChild(card, index);
-        SubscribeToCardInputEvent(card);
-    }
-
-    public void RemoveCard(Card card)
-    {        
-        RemoveChild(card);                
-        UnSubscribeToCardInputEvent(card);
+        UnSubscribeToCardInputEvent(card);        
+        card.Reparent(cardHand);
+        cardHand.MoveChild(card, index);
+        cardHand.SubscribeToCardInputEvent(card);
     }
 
     public void SortCards()
@@ -86,8 +73,7 @@ public partial class CardHand : Node2D
             i++;
             if (card.tween == null || !card.tween.IsValid())
             {
-                card.tween = CreateTween();
-                //GD.Print($"card {card.textLabel.Text} global position is {card.GlobalPosition}, position is {card.Position}, target relative position is {position}");
+                card.tween = CreateTween();                
                 card.tween.TweenProperty(card, "position", position, sortSpeed);
             }
         }
@@ -100,8 +86,7 @@ public partial class CardHand : Node2D
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
             {
                 selectedCard = card;
-                selectionOffset = mouseEvent.GlobalPosition - card.GlobalPosition;
-                GD.Print("Card " + card.textLabel.Text + " clicked with " + @event.AsText()); //TODO remove
+                selectionOffset = mouseEvent.GlobalPosition - card.GlobalPosition;                
                 card.tween?.Kill();
 
             }
@@ -123,22 +108,20 @@ public partial class CardHand : Node2D
                     {
                         if (GetChildren().Contains(hitCard))
                         {                            
-                            MoveChild(selectedCard, GetCardIndexLeftOrRight(hitCard)); //add left/right drop
+                            MoveChild(selectedCard, GetCardIndexLeftOrRight(hitCard));
                         }
                         else
                         {
                             CardHand cardHand = hitCard.GetParent<CardHand>();
                             if (cardHand != null)
-                            {                                                   
-                                RemoveCard(selectedCard);
-                                cardHand.AddCard(selectedCard, GetCardIndexLeftOrRight(hitCard));
+                            {
+                                ReparentCard(selectedCard, GetCardIndexLeftOrRight(hitCard), cardHand);
                                 cardHand.SortCards();
                             }
                         }
                     }
                 }
-                selectedCard = null;
-                GD.Print($"Card {card.textLabel.Text} released with {@event.AsText()} at global mouse position {GetGlobalMousePosition()} and card.globalPosition {card.GlobalPosition}"); //TODO remove                                                                                                              
+                selectedCard = null;                                                                                                                              
                 SortCards();
             }
         }
