@@ -6,7 +6,7 @@
 [node name="CardHand" type="Node2D"]
 script = ExtResource("1_54ttf")
 
-[node name="Card" parent="." instance=ExtResource("2_21pom")]
+[node name="Card1" parent="." instance=ExtResource("2_21pom")]
 
 [node name="Card2" parent="." instance=ExtResource("2_21pom")]
 
