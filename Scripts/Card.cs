@@ -4,7 +4,7 @@ using System;
 public partial class Card : Area2D
 {
 	[Export]
-	public RichTextLabel textLabel;
+	public Label textLabel;
 	public Tween tween;
     [Export]
     public Sprite2D cardArt;

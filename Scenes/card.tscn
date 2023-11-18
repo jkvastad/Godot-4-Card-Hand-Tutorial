@@ -21,10 +21,11 @@ offset_right = 64.0
 offset_bottom = 90.0
 mouse_filter = 1
 
-[node name="Text" type="RichTextLabel" parent="TextPanel"]
+[node name="Text" type="Label" parent="TextPanel"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 text = "Namn"
+autowrap_mode = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4o0l0")
