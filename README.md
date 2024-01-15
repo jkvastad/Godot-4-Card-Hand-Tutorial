@@ -19,12 +19,13 @@ In this project I used Node2D based nodes.
 ## [Raycasting](https://docs.godotengine.org/en/stable/tutorials/physics/ray-casting.html)
 A very useful operation with a few different implementations.
 * In this tutorial [intersect_point](https://docs.godotengine.org/en/stable/classes/class_physicsdirectspacestate2d.html#class-physicsdirectspacestate2d-method-intersect-point) is used.
+* For some ray casting basics I made [another example project](https://github.com/jkvastad/godot-4-raycast-event-vs-polling/tree/master)
   
 * [There is a caveat to raycasting](https://docs.godotengine.org/en/stable/tutorials/physics/ray-casting.html#accessing-space):
   
 > Godot physics runs by default in the same thread as game logic, but may be set to run on a separate thread to work more efficiently. Due to this, the only time accessing space is safe is during the Node._physics_process() callback. Accessing it from outside this function may result in an error due to space being locked.
   
-  The mentioned space is the physics space on which we raycast, thus we can only raycast reliably inside the [_physics_process](https://docs.godotengine.org/en/stable/classes/class_node.html#class-node-method-physics-process) method, forcing us to use [polling instead of events](https://docs.godotengine.org/en/stable/tutorials/inputs/input_examples.html#events-versus-polling). There are workarounds where we don't poll for everything all the time, which leads us to the next point of the project.
+  The mentioned space is the physics space on which we raycast, thus we can only raycast reliably inside the [_physics_process](https://docs.godotengine.org/en/stable/classes/class_node.html#class-node-method-physics-process) method, forcing us to use [polling instead of events](https://docs.godotengine.org/en/stable/tutorials/inputs/input_examples.html#events-versus-polling). There are workarounds where we don't poll for everything all the time, which leads us to the next point of the project (if excessive polling is not your bottleneck it is probably better to just go with polling).
 
 # [async/await](https://learn.microsoft.com/en-US/dotnet/csharp/asynchronous-programming/)
 In C# we can create an asynchronous task, postpone the execution of an async method and await the result of the task.
